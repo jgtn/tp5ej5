@@ -1,3 +1,5 @@
+#include "core.h"
+static int surroundings_chk(int matriz[P][N][M], int fila, int columna);
 /***************************************************************************************************
 FUNCION nextgen()
 
