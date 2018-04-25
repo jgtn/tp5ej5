@@ -1,4 +1,6 @@
 #include "core.h"
+#include "matrix_constants.h"
+
 static int surroundings_chk(int matriz[P][N][M], int fila, int columna);
 /***************************************************************************************************
 FUNCION nextgen()
@@ -98,3 +100,41 @@ void nextgen(int world [P][N][M])
 
     return neighbours;
   }
+
+  /***************************************************************************************************
+  FUNCION ini_world()
+
+  inicializa aleatoreamente las celulas en world
+  **************************************************************************************************/
+void ini_world(int matrix[P][N][M])
+{
+  srand(time(NULL)); /*Para generar un valor aleatorio*/
+
+  int i, j;
+  for (i = 0; i < N; i++)
+  {
+    for (j = 0; j < M; j++)
+    {
+      matrix[0][i][j] = (rand()%2); /*Cada célula se inicializa como viva (1) o muerta (0) de forma aleatoria*/
+    }
+  }
+}
+
+/*SWAP_MATRIX permite copiar, en una matriz de 3 dimensiones, el contenido de
+una dimensión siguiente, a la actual (de 1 a 0, de 2 a 1 y asi).  EL CONTENIDO
+DE LA MATRIZ "0" SE PIERDE!!! ADEMÁS EL CONTENIDO DE LA MATRIZ N Y LA (N-1)
+SERÁ EL MISMO*/
+void swap_matrix (int matrix [P][N][M])
+{
+  int i,j,k;/*indices para moverme en la matriz*/
+  for(i=0;i<N;i++)/*me muevo por la matriz con estos for*/
+  {
+    for(j=0;j<M;j++)
+    {
+      for(k=0;k<P-1;k++)
+      {
+        matrix[k][i][j]=matrix[k+1][i][j];/*copia de contenido*/
+      }
+    }
+  }
+}
